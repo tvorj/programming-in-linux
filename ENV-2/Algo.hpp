@@ -2,4 +2,4 @@
 #include <iostream>
 #include "ComplexNumber.hpp"
 
-void algo(ComplexNumber* arr, std::size_t size);
+void Algo(ComplexNumber* arr, std::size_t size);
