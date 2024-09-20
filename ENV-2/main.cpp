@@ -9,13 +9,12 @@ int main(){
 	arr[3].set_num(5,1);
 	arr[4].set_num(2,2);
 	for(std::size_t i = 0; i < 5; i++){
-		arr[i].show();
-		std::cout<<std::endl;
+		std::cout<<arr[i];
 	}
 	std::cout<<"After sort"<<std::endl;
-	Algo(arr, 5);
+	sortByAbsValue(arr, 5);
 	for(std::size_t i = 0; i < 5; i++){
-		arr[i].show();
+		std::cout<<arr[i];
 		std::cout<<std::endl;
 	}
 	delete[] arr;	
