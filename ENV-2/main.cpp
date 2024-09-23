@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "ComplexNumber.hpp"
-#include "Algo.hpp"
+#include "sortByAbsValue.hpp"
 int main(){
 	ComplexNumber* arr = new ComplexNumber[5];
 	arr[0].set_num(1,2);

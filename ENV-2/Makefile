@@ -1,12 +1,13 @@
 CL = clang++ 
+sort = sortByAbsValue.o
 
-all: result main.o ComplexNumber.o Algo.o print
+all: result main.o ComplexNumber.o $(sort) print
 
 print: result
 	./result
 
-result: main.o ComplexNumber.o Algo.o
-	$(CL)  main.o ComplexNumber.o Algo.o -o result
+result: main.o ComplexNumber.o $(sort)
+	$(CL)  main.o ComplexNumber.o $(sort) -o result
 
 main.o: main.cpp
 	$(CL) -c main.cpp -o main.o
@@ -14,8 +15,8 @@ main.o: main.cpp
 ComplexNumber.o: ComplexNumber.cpp
 	$(CL) -c ComplexNumber.cpp -o ComplexNumber.o
 
-Algo.o: Algo.cpp
-	$(CL) -c Algo.cpp -o Algo.o
+$(sort): sortByAbsValue.cpp
+	$(CL) -c sortByAbsValue.cpp -o $(sort)
 
 clean: 
 	@echo "deleting object files"
