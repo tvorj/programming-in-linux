@@ -15,7 +15,6 @@ int main(){
 	sortByAbsValue(arr, 5);
 	for(std::size_t i = 0; i < 5; i++){
 		std::cout<<arr[i];
-		std::cout<<std::endl;
 	}
 	delete[] arr;	
 	std::cout<<"Worked well"<<std::endl;
