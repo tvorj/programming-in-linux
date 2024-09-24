@@ -1,7 +1,8 @@
 #include "sortByAbsValue.hpp"
 #include <iostream>
 
-void sortByAbsValue(ComplexNumber* arr, std::size_t size){//bubble sort for complexnumber objects
+//bubble sort for ComplexNumber arrays
+void sortByAbsValue(ComplexNumber* arr, std::size_t size){
 	bool swapped;
 	for(std::size_t i = 0; i < size - 1; i++){
 		swapped = false;
