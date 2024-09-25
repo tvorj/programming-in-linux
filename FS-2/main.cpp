@@ -5,6 +5,24 @@
 #include <cstring>
 #include <string>
 
+void read_content(int file_descriptor, char* buffer, ssize_t& len){
+	while (len < 100){
+        ssize_t temp = read(file_descriptor, buffer + len, 10);
+        len += temp;
+        if (temp == 0)
+        {
+            break;
+        }
+        if (temp == -1)
+        {
+            perror("error reading file");
+            close(file_descriptor);
+            exit(EXIT_FAILURE);
+        }
+    }
+    buffer[len] = '\0';
+}
+
 void copy(char *file1, char *file2)
 {
     int fd1 = open(file1, O_RDONLY);
@@ -15,23 +33,8 @@ void copy(char *file1, char *file2)
     }
     char buffer[101];
     ssize_t bytes_read = 0;
-    while (bytes_read < 100)
-    {
-        ssize_t temp = read(fd1, buffer + bytes_read, 10);
-        bytes_read += temp;
-        if (temp == 0)
-        {
-            break;
-        }
-        if (temp == -1)
-        {
-            perror("error reading file");
-            close(fd1);
-            exit(EXIT_FAILURE);
-        }
-    }
-    buffer[bytes_read] = '\0';
-    int fd2 = open(file2, O_WRONLY | O_CREAT, 00600);
+    read_content(fd1, buffer, bytes_read);
+    int fd2 = open(file2, O_WRONLY | O_CREAT | O_TRUNC, 00600);
     if (fd2 == -1)
     {
         perror("error opening file");
