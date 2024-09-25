@@ -2,6 +2,8 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <cstring>
+#include <string>
 
 //man creat include .h - es
 //man 2 erno
@@ -16,13 +18,13 @@ void cat(char* file){
                 perror("error opening file");
                 exit(EXIT_FAILURE);
 	}
-	ssize_t bytes_read = read(fd, buffer, 1);
+	ssize_t bytes_read = read(fd, buffer, 10);
 	if(bytes_read == -1){
 		perror("error reading file");
+		close(fd);
                 exit(EXIT_FAILURE);
 	}
-	std::cout<<buffer[0]<<std::endl;
-        while(bytes_read < 100){
+        while(bytes_read < 99){
 		ssize_t temp = read(fd, buffer, 10);
 		bytes_read += temp;
 		if(temp == 0){
@@ -30,11 +32,7 @@ void cat(char* file){
 		}
         }
 	buffer[bytes_read] = '\0';
-	std::cout<<bytes_read<<std::endl;
-	for(std::size_t i = 0; i < bytes_read; i++){
-		std::cout<<buffer[i];
-	}
-	std::cout<<std::endl;
+	std::cout<<static_cast<std::string>(buffer);
 	close(fd);
 }
 
