@@ -1,1 +1,1 @@
-test file
+printing content of a.txt
