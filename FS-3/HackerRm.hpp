@@ -6,12 +6,14 @@ void rm(char* file){
 		perror("error opening file");
 		exit(EXIT_FAILURE);
 	}
+	//offset to the end of file(size of file)
 	off_t file_size = lseek(fd, 0, SEEK_END);
 	if(file_size == -1){
 		close(fd);
 		perror("error lseeking file");
 		exit(EXIT_FAILURE);
 	}
+	//go to start of file
 	if(lseek(fd, 0, SEEK_SET) == -1 ){
 		close(fd);
                 perror("error lseeking file");
