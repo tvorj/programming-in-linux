@@ -11,6 +11,8 @@ void copy(char *file1, char *file2)
     char buffer[101];
     ssize_t bytes_read = 0;
     read_content(fd1, buffer, bytes_read);
+    //creat with read write if doesnt exist
+    //TRUNCate to len = 0
     int fd2 = open(file2, O_WRONLY | O_CREAT | O_TRUNC, 00600);
     if (fd2 == -1)
     {
