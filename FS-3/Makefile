@@ -3,7 +3,7 @@ TARGET = hacker-rm
 
 all: $(TARGET) run 
 
-run: a.txt
+run: $(TARGET) a.txt
 	./$(TARGET) a.txt
 
 a.txt:
