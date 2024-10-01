@@ -1,20 +1,17 @@
 CL = clang++
+TARGET = read-file
 
-all: read-only print
+all: $(TARGET) run
 
-print: read-only
-	cat a.txt
-	./read-only a.txt
+run: $(TARGET)
+	./$(TARGET) a.txt
 
-read-only: main.o ReadFile.o
-	$(CL) main.o ReadFile.o -o read-only
+$(TARGET): $(TARGET).o 
+	$(CL) $(TARGET).o -o $(TARGET)
 
-main.o: main.cpp ReadFile.hpp
-	$(CL) -c main.cpp -o main.o
-
-ReadFile.o: ReadFile.cpp ReadFile.hpp
-	$(CL) -c ReadFile.cpp -o ReadFile.o
+$(TARGET).o: $(TARGET).cpp 
+	$(CL) -c $(TARGET).cpp -o $(TARGET).o
 
 clean:
 	@echo "cleaning.."
-	rm read-only *.o 
+	rm $(TARGET) *.o 

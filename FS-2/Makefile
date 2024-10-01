@@ -1,32 +1,17 @@
 CL = clang++
+TARGET = simple-copy
 
-all: simple-copy print
+all: $(TARGET) run
 
-a.txt:
-	touch a.txt
-	@echo "content of a.txt" >> a.txt
+run: $(TARGET) 
+	./$(TARGET) a.txt b.txt
 
-b.txt:
-	touch b.txt
-	@echo "content of b.txt" >> b.txt
+$(TARGET): $(TARGET).o 
+	$(CL) $(TARGET).o -o $(TARGET)
 
-print: simple-copy a.txt b.txt
-	cat a.txt b.txt
-	./simple-copy a.txt b.txt
-	cat a.txt b.txt
-
-simple-copy: main.o SimpleCopy.o ReadContent.o
-	$(CL) main.o ReadContent.o SimpleCopy.o -o simple-copy
-
-main.o: main.cpp SimpleCopy.hpp ReadContent.hpp
-	$(CL) -c main.cpp -o main.o
-
-SimpleCopy.o: SimpleCopy.cpp SimpleCopy.hpp ReadContent.hpp
-	$(CL) -c SimpleCopy.cpp -o SimpleCopy.o
-
-ReadContent.o: ReadContent.cpp ReadContent.hpp
-	$(CL) -c ReadContent.cpp -o ReadContent.o
+$(TARGET).o: $(TARGET).cpp 
+	$(CL) -c $(TARGET).cpp -o $(TARGET).o
 
 clean:
 	@echo "cleaning..."
-	rm simple-copy *.txt *.o
+	rm $(TARGET) *.o

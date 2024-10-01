@@ -4,8 +4,6 @@
 #include <unistd.h>
 #include <cstring>
 #include <string>
-#include "SimpleCopy.hpp"
-#include "ReadContent.hpp"
 
 void copy(char *file1, char *file2)
 {
@@ -15,19 +13,35 @@ void copy(char *file1, char *file2)
         perror("error opening file");
         exit(EXIT_FAILURE);
     }
-    char buffer[101];
-    ssize_t bytes_read = 0;
-    read_content(fd1, buffer, bytes_read);
-    //creat with read write if doesnt exist
-    //TRUNCate to len = 0
     int fd2 = open(file2, O_WRONLY | O_CREAT | O_TRUNC, 00600);
     if (fd2 == -1)
     {
         perror("error opening file");
         exit(EXIT_FAILURE);
     }
-    write(fd2, buffer, bytes_read);
+    char buffer[4096];
+    ssize_t bytes_read = 0;
+    while((bytes_read = read(fd1, buffer, 4096)) > 0){
+        write(fd2, buffer, bytes_read);
+    }
+    if(bytes_read == -1){
+        perror("error reading file");
+	close(fd1);
+	close(fd2);
+        exit(EXIT_FAILURE);
+    }
     close(fd2);
     close(fd1);
+}
+
+int main(int argc, char *argv[])
+{
+    if (argc != 3)
+    {
+        perror("must be 2 arguments");
+        exit(EXIT_FAILURE);
+    }
+    copy(argv[1], argv[2]);
+    return 0;
 }
 
