@@ -41,7 +41,10 @@ int main(int argc, char **argv)
     initialize(argc, argv);
     std::string input;
     std::cin >> input;
-    std::string reversed(input.rbegin(), input.rend());
+    std::string reversed = input;
+    for(std::size_t i = 0; i < input.size(); i++){
+	reversed[i] = input[input.size() - 1 - i];
+    }
     std::cout << reversed << std::endl;
     return 0;
 }
