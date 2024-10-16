@@ -6,7 +6,9 @@
 #include <errno.h>
 #include <algorithm>
 
-int main(int argc, char *argv[])
+char buffer[4097];
+
+int main()
 {
     std::string source, destination;
     ssize_t s_offset, d_offset;
@@ -21,7 +23,6 @@ int main(int argc, char *argv[])
     std::cin >> d_offset;
     std::cout << "Enter the number of bytes to copy: ";
     std::cin >> bytes_to_copy;
-    char buffer[4097];
     int file1 = open(source.c_str(), O_RDONLY);
     if (file1 == -1)
     {
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
         close(file1);
         exit(errno);
     }
-    int cur_s = lseek(file1, s_offset, SEEK_CUR);
+    int cur_s = lseek(file1, s_offset, SEEK_SET);
     if (cur_s == -1)
     {
         std::cerr << "error lseeking file" << std::endl;
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
         close(file2);
         exit(errno);
     }
-    int cur_d = lseek(file2, d_offset, SEEK_CUR);
+    int cur_d = lseek(file2, d_offset, SEEK_SET);
     if (cur_d == -1)
     {
         std::cerr << "error lseeking file" << std::endl;
