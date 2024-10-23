@@ -14,6 +14,7 @@ void do_function(int wstatus, std::chrono::microseconds duration)
 
 void do_command(char **argv)
 {
+    auto start = std::chrono::high_resolution_clock::now();
     pid_t p = fork();
     if (p < 0)
     {
@@ -32,7 +33,6 @@ void do_command(char **argv)
     else
     {
         // parent
-        auto start = std::chrono::high_resolution_clock::now();
         int wait_status;
         if (wait(&wait_status) == -1)
         {
