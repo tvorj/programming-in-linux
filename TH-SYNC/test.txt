@@ -1,0 +1,34 @@
+Spinlock:
+0.0422073 seconds
+0.121775 seconds
+0.151338 seconds
+0.127439 seconds
+0.107638 seconds
+0.189178 seconds
+0.102669 seconds
+0.0503357 seconds
+0.100035 seconds
+0.134308 seconds
+Mutex:
+0.044217 seconds
+0.0539325 seconds
+0.0506106 seconds
+0.0593659 seconds
+0.0412499 seconds
+0.0580453 seconds
+0.0527327 seconds
+0.0328548 seconds
+0.0358343 seconds
+0.0614649 seconds
+Semaphore:
+0.129073 seconds
+0.122765 seconds
+0.123705 seconds
+0.0874705 seconds
+0.129053 seconds
+0.12402 seconds
+0.123113 seconds
+0.128042 seconds
+0.107645 seconds
+0.131028 seconds
+
